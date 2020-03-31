@@ -1,6 +1,5 @@
 ﻿using API.Products.DB;
 using API.Products.Interfaces;
-using API.Products.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -26,32 +25,18 @@ namespace API.Products.Providers
             SeedData();
         }
 
-        private void SeedData()
-        {
-            if(!dbContext.Products.Any())
-            {
-                dbContext.Products.AddRange(
-                    new DB.Product() { Id = 1, Name = "Keyboard", Price = 20, Inventory = 100 },
-                    new DB.Product() { Id = 2, Name = "Mouse", Price = 5, Inventory = 200 },
-                    new DB.Product() { Id = 3, Name = "Monitor", Price = 150, Inventory = 1000 },
-                    new DB.Product() { Id = 4, Name = "CPU", Price = 200, Inventory = 2000 }
-                );
-                dbContext.SaveChanges();
-            }
-        }
-
         public async Task<(bool IsSuccess, IEnumerable<Models.Product> Products, string ErrorMessage)> GetProductsAsync()
         {
             try
             {
                 var products = await dbContext.Products.ToListAsync();
-                if(products != null && products.Any())
+                if (products != null && products.Any())
                 {
                     var result = mapper.Map<IEnumerable<DB.Product>, IEnumerable<Models.Product>>(products);
                     return (true, result, null);
                 }
                 return (false, null, "Not Found");
-            } 
+            }
             catch (Exception ex)
             {
                 logger?.LogError(ex.ToString());
@@ -75,6 +60,20 @@ namespace API.Products.Providers
             {
                 logger?.LogError(ex.ToString());
                 return (false, null, ex.Message);
+            }
+        }
+
+        private void SeedData()
+        {
+            if (!dbContext.Products.Any())
+            {
+                dbContext.Products.AddRange(
+                    new DB.Product() { Id = 1, Name = "Keyboard", Price = 20, Inventory = 100 },
+                    new DB.Product() { Id = 2, Name = "Mouse", Price = 5, Inventory = 200 },
+                    new DB.Product() { Id = 3, Name = "Monitor", Price = 150, Inventory = 1000 },
+                    new DB.Product() { Id = 4, Name = "CPU", Price = 200, Inventory = 2000 }
+                );
+                dbContext.SaveChanges();
             }
         }
     }

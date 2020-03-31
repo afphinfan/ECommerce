@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace API.Products.Models
+﻿namespace API.Products.Models
 {
     public class Product
     {

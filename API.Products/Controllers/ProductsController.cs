@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Products.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using API.Products.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace API.Products.Controllers
 {
@@ -22,7 +18,7 @@ namespace API.Products.Controllers
         public async Task<IActionResult> GetProductsAsync()
         {
             var result = await productsProvider.GetProductsAsync();
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 return Ok(result.Products);
             }

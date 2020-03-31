@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace API.Products.Profiles
+﻿namespace API.Products.Profiles
 {
     public class ProductProfile : AutoMapper.Profile
     {
