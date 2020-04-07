@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Orders.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using API.Orders.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace API.Orders.Controllers
 {

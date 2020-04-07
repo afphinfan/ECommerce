@@ -32,7 +32,7 @@ namespace API.Orders.Providers
                 var orders = await dbContext.Orders
                     .Where(o => o.CustomerId == customerId)
                     .Include(o => o.Items)
-                    .ToListAsync();                
+                    .ToListAsync();
                 if (orders != null && orders.Any())
                 {
                     var result = mapper.Map<IEnumerable<DB.Order>, IEnumerable<Models.Order>>(orders);

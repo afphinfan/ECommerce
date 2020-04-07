@@ -1,8 +1,12 @@
+using API.Search.Interfaces;
+using API.Search.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Polly;
+using System;
 
 namespace API.Search
 {
@@ -18,6 +22,25 @@ namespace API.Search
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ISearchService, SearchService>();
+
+            services.AddScoped<IOrdersService, OrdersService>();
+            services.AddHttpClient("OrdersService", config =>
+            {
+                config.BaseAddress = new Uri(Configuration["Services:Orders"]);
+            }).AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(500)));
+
+            services.AddScoped<IProductsService, ProductsService>();
+            services.AddHttpClient("ProductsService", config =>
+            {
+                config.BaseAddress = new Uri(Configuration["Services:Products"]);
+            }).AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(500)));
+
+            services.AddScoped<ICustomersService, CustomersService>();
+            services.AddHttpClient("CustomersService", config =>
+            {
+                config.BaseAddress = new Uri(Configuration["Services:Customers"]);
+            }).AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(500)));
             services.AddControllers();
         }
 
