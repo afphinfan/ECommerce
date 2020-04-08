@@ -38,7 +38,7 @@ namespace API.Search.Services
                         item.UnitPrice = productsResult.IsSuccess ?
                             productsResult.Products.FirstOrDefault(p => p.Id == item.ProductId).Price :
                             item.UnitPrice;
-                        ActualTotal += item.UnitPrice;
+                        ActualTotal += item.UnitPrice * item.Quantity;
                         item.ProductName = productsResult.IsSuccess ?
                             productsResult.Products.FirstOrDefault(p => p.Id == item.ProductId).Name :
                             "Product information is not available";

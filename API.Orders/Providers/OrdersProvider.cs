@@ -75,7 +75,7 @@ namespace API.Orders.Providers
                     {
                         new OrderItem() { OrderId = 1, ProductId = 1, Quantity = 10, UnitPrice = 10 },
                         new OrderItem() { OrderId = 1, ProductId = 2, Quantity = 10, UnitPrice = 10 },
-                        new OrderItem() { OrderId = 1, ProductId = 3, Quantity = 10, UnitPrice = 10 },
+                        new OrderItem() { OrderId = 1, ProductId = 3, Quantity = 150, UnitPrice = 10 },
                         new OrderItem() { OrderId = 2, ProductId = 2, Quantity = 10, UnitPrice = 10 },
                         new OrderItem() { OrderId = 3, ProductId = 3, Quantity = 1, UnitPrice = 100 }
                     },

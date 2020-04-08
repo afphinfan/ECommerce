@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  api.search:
+    image: ${DOCKER_REGISTRY-}apisearch
+    build:
+      context: .
+      dockerfile: API.Search/Dockerfile
+
+  api.products:
+    image: ${DOCKER_REGISTRY-}apiproducts
+    build:
+      context: .
+      dockerfile: API.Products/Dockerfile
+
+
+  api.orders:
+    image: ${DOCKER_REGISTRY-}apiorders
+    build:
+      context: .
+      dockerfile: API.Orders/Dockerfile
+
+
+  api.customers:
+    image: ${DOCKER_REGISTRY-}apicustomers
+    build:
+      context: .
+      dockerfile: API.Customers/Dockerfile
+
